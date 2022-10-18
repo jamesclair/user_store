@@ -20,9 +20,7 @@ public class TestRestSecurity {
         User.UserBuilder users = User.builder();
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
 
-        manager.createUser(users.username("user1").password(passwordEncoder().encode("password")).roles().build());
-        manager.createUser(users.username("user2").password(passwordEncoder().encode("password")).roles("USER").build());
-        manager.createUser(users.username("user3").password(passwordEncoder().encode("password")).roles("ADMIN").build());
+        manager.createUser(users.username("user1").password(passwordEncoder().encode("password")).roles("USER").build());
         return manager;
     }
     @Bean
@@ -33,7 +31,7 @@ public class TestRestSecurity {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-//                .mvcMatchers("/test").hasAnyRole("USER")
+                .mvcMatchers("/test").hasAnyRole("USER")
                 .anyRequest().permitAll()
                 .and()
                 .csrf().disable()
