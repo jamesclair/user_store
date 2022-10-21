@@ -4,17 +4,16 @@ plugins {
 	id 'java'
 }
 
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
 
 repositories {
 	mavenCentral()
 }
 
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'javax.validation:validation-api:2.0.1.Final'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
@@ -22,6 +21,7 @@ dependencies {
 	testImplementation 'org.projectlombok:lombok:1.18.22'
 	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
 }
+
 
 tasks.named('test') {
 	useJUnitPlatform()

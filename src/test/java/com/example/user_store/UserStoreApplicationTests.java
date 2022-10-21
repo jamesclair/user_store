@@ -16,10 +16,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-class UserStoreApplicationTests extends AbstractTestControllerMock {
+class UserStoreApplicationTests extends AbstractBaseControllerMock {
 	@Test
 	public void testGetUnauthenticatedPath() throws Exception {
-		String uri = "/";
+		String uri = "/public";
 		MvcResult mvcResult = super.getMvc().perform(MockMvcRequestBuilders.get(uri)
 				.accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 
@@ -31,7 +31,7 @@ class UserStoreApplicationTests extends AbstractTestControllerMock {
 	@Test
 	@WithMockUser(username = "user1",roles = {"USER"})
 	public void testGetAuthenticatedPath() throws Exception {
-		super.getMvc().perform(MockMvcRequestBuilders.get("/test")
+		super.getMvc().perform(MockMvcRequestBuilders.get("/private")
 						.header("Authorization", "Basic " + Base64.getEncoder().encodeToString("user1:password".getBytes())))
 				.andExpect(ResultMatcher.matchAll(status().isOk()))
 				.andDo(print());
